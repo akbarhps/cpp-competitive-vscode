@@ -1,6 +1,5 @@
 /**
  * Created by akbar on 8/11/2021.
- * https://github.com/akbarhps/cpp-competitive-vscode
  */
 
 #include <bits/stdc++.h>
