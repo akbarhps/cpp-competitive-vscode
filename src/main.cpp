@@ -12,12 +12,11 @@ using namespace std;
     cin.tie(NULL);               \
     cout.tie(NULL)
 
-#define Clear(iterable) \
-    for (auto &element : iterable) element = 0
-
-int main()
+int main() 
 {
     SetIO();
+
+    
 
     return 0;
 }

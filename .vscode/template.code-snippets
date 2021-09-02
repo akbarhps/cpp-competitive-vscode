@@ -16,7 +16,8 @@
             "    cin.tie(NULL);               \\",
             "    cout.tie(NULL)",
             "",
-            "int main() {",
+            "int main() ",
+            "{",
             "    SetIO();\n",
             "    $0\n",
             "    return 0;",
@@ -352,4 +353,16 @@
             "    for (auto &element : iterable) element = 0",
         ]
     },
+    
+    "iterable-for-each": {
+        "prefix": "iterable-each",
+        "body": [
+            "for(auto &e: $1)",
+            "{",
+            "\t$0",
+            "}",
+        ]
+    },
+
+
 }
