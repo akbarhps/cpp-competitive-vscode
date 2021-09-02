@@ -193,6 +193,11 @@
             "}",
         ]
     },
+
+    //=====================================================================================================//
+    //====================================         timer             ======================================//
+    //=====================================================================================================//
+
     "timer": {
         "prefix": "timer",
         "body": [
@@ -216,6 +221,11 @@
             "};",
         ],
     },
+
+    //=====================================================================================================//
+    //====================================         i/o               ======================================//
+    //=====================================================================================================//
+
     "printer": {
         "prefix": "printer",
         "body": [
@@ -235,6 +245,7 @@
             "}",
         ]
     },
+    
     "scanner": {
         "prefix": "scanner",
         "body": [
@@ -248,8 +259,20 @@
             "}",
         ]
     },
-    "sort-array": {
-        "prefix": "sort-array",
+
+    //=====================================================================================================//
+    //====================================         array             ======================================//
+    //=====================================================================================================//
+    
+    "array-size": {
+        "prefix": "array-size",
+        "body": [
+            "sizeof($1) / sizeof(($1)[0])$0"
+        ]
+    },
+
+    "array-sort": {
+        "prefix": "array-sort",
         "body": [
             "template <typename T, size_t N>",
             "inline void Sort(T (&arr)[N], bool isDecrement = false)",
@@ -262,8 +285,9 @@
             "}",
         ]
     },
-    "sort-array-comp": {
-        "prefix": "sort-array-comp",
+    
+    "array-sort-comparator": {
+        "prefix": "array-sort-comparator",
         "body": [
             "template <typename T, size_t N, typename U>",
             "inline void Sort(T (&arr)[N], U &_comparator)",
@@ -272,8 +296,20 @@
             "}",
         ]
     },
-    "sort-vector": {
-        "prefix": "sort-vector",
+
+    //=====================================================================================================//
+    //====================================         vector            ======================================//
+    //=====================================================================================================//
+
+    "vector-size": {
+        "prefix": "vector-size",
+        "body": [
+            "$1.begin(), $1.end();$0"
+        ]
+    },
+
+    "vector-sort": {
+        "prefix": "vector-sort",
         "body": [
             "template <typename T>",
             "inline void Sort(vector<T> &vec, bool isDecrement = false)",
@@ -285,8 +321,9 @@
             "}",
         ]
     },
-    "sort-vector-comp": {
-        "prefix": "sort-vector-comp",
+
+    "vector-sort-comparator": {
+        "prefix": "vector-sort-comparator",
         "body": [
             "template <typename T, typename U>",
             "inline void Sort(vector<T> &vec, U &_comparator)",
@@ -295,16 +332,24 @@
             "}",
         ]
     },
-    "array-size": {
-        "prefix": "array-size",
+
+    //=====================================================================================================//
+    //====================================         iterable          ======================================//
+    //=====================================================================================================//
+
+    "iterable-fill": {
+        "prefix": "iterable-fill",
         "body": [
-            "sizeof($1) / sizeof(($1)[0])$0"
+            "#define Fill(iterable, value) \\",
+            "    for (auto &element : iterable) element = value",
         ]
     },
-    "vector-size": {
-        "prefix": "vector-size",
+    
+    "iterable-clear": {
+        "prefix": "iterable-clear",
         "body": [
-            "$1.begin(), $1.end();$0"
+            "#define Clear(iterable) \\",
+            "    for (auto &element : iterable) element = 0",
         ]
     },
 }
