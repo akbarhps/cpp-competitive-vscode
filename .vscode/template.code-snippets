@@ -1,7 +1,6 @@
 {
     "init": {
         "prefix": "init",
-        "description": "base template",
         "body": [
             "/**",
             " * Created by akbar on 8/11/2021.",
@@ -12,17 +11,20 @@
             "",
             "using namespace std;",
             "",
-            "int main() {",
-            "    ios::sync_with_stdio(false); ",
-            "    cin.tie(NULL); cout.tie(NULL);",
+            "#define SetIO()                  \\",
+            "    ios::sync_with_stdio(false); \\",
+            "    cin.tie(NULL);               \\",
+            "    cout.tie(NULL)",
             "",
+            "int main() {",
+            "    SetIO();\n",
+            "    $0\n",
             "    return 0;",
             "}",
         ]
     },
     "template": {
         "prefix": "template",
-        "description": "initial template version 2 for cp",
         "body": [
             "/**",
             " * Created by akbar on 8/11/2021.",
@@ -186,23 +188,26 @@
             "",
             "int main() {",
             "    SetIO;",
+            "\t$0",
             "    return 0;",
             "}",
         ]
     },
     "timer": {
         "prefix": "timer",
-        "description": "chrono timer",
         "body": [
-            "struct Timer {",
+            "struct Timer",
+            "{",
             "    chrono::time_point<chrono::high_resolution_clock> start, end;",
             "    chrono::duration<float> duration{};",
             "",
-            "    Timer() {",
+            "    Timer()",
+            "    {",
             "        start = chrono::high_resolution_clock::now();",
             "    }",
             "",
-            "    ~Timer() {",
+            "    ~Timer()",
+            "    {",
             "        end = chrono::high_resolution_clock::now();",
             "        duration = end - start;",
             "        float ms = duration.count() * 1000.0f;",
@@ -213,7 +218,6 @@
     },
     "printer": {
         "prefix": "printer",
-        "description": "print function",
         "body": [
             "inline void Print() { cout << \"\\n\"; }",
             "",
@@ -233,7 +237,6 @@
     },
     "scanner": {
         "prefix": "scanner",
-        "description": "input function",
         "body": [
             "template<typename T>",
             "inline void Scan(T &var) { cin >> var; }",
@@ -244,5 +247,64 @@
             "    if (sizeof ...(args)) Scan(args...);",
             "}",
         ]
-    }
+    },
+    "sort-array": {
+        "prefix": "sort-array",
+        "body": [
+            "template <typename T, size_t N>",
+            "inline void Sort(T (&arr)[N], bool isDecrement = false)",
+            "{",
+            "    int size = (sizeof(arr) / sizeof((arr)[0]));",
+            "    if (isDecrement)",
+            "        sort(arr, arr + size, greater<>());",
+            "    else",
+            "        sort(arr, arr + size);",
+            "}",
+        ]
+    },
+    "sort-array-comp": {
+        "prefix": "sort-array-comp",
+        "body": [
+            "template <typename T, size_t N, typename U>",
+            "inline void Sort(T (&arr)[N], U &_comparator)",
+            "{",
+            "    sort(arr, arr + ArrSize(arr), _comparator);",
+            "}",
+        ]
+    },
+    "sort-vector": {
+        "prefix": "sort-vector",
+        "body": [
+            "template <typename T>",
+            "inline void Sort(vector<T> &vec, bool isDecrement = false)",
+            "{",
+            "    if (isDecrement)",
+            "        sort(vec.begin(), vec.end(), greater<>());",
+            "    else",
+            "        sort(vec.begin(), vec.end());",
+            "}",
+        ]
+    },
+    "sort-vector-comp": {
+        "prefix": "sort-vector-comp",
+        "body": [
+            "template <typename T, typename U>",
+            "inline void Sort(vector<T> &vec, U &_comparator)",
+            "{",
+            "    sort(vec.begin(), vec.end(), _comparator);",
+            "}",
+        ]
+    },
+    "array-size": {
+        "prefix": "array-size",
+        "body": [
+            "sizeof($1) / sizeof(($1)[0])$0"
+        ]
+    },
+    "vector-size": {
+        "prefix": "vector-size",
+        "body": [
+            "$1.begin(), $1.end();$0"
+        ]
+    },
 }
