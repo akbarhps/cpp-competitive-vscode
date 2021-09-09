@@ -48,7 +48,7 @@
             "#define debug(...)",
             "#endif",
         ]
-    }
+    },
 
     "template": {
         "prefix": "template",
