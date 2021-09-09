@@ -4,7 +4,7 @@
     {
       "label": "build",
       "type": "shell",
-      "command": "g++ .\\src\\main.cpp -o .\\out\\main.exe",
+      "command": "g++ -DDEBUG -Wall -g .\\src\\main.cpp -o .\\out\\main.exe",
       "args": [
         // "-std=c++17",
       ]
@@ -12,7 +12,7 @@
     {
       "label": "run",
       "type": "shell",
-      "command": ".\\out\\main.exe",
+      "command": "Get-Content .\\out\\input.txt | .\\out\\main.exe",
       "dependsOn": [
         "build"
       ],
@@ -22,9 +22,9 @@
       }
     },
     {
-      "label": "run and input",
+      "label": "run last build",
       "type": "shell",
-      "command": "Get-Content .\\out\\input.txt | .\\out\\main.exe",
+      "command": ".\\out\\main.exe",
       "problemMatcher": []
     },
     {

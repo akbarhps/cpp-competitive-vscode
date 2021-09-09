@@ -23,6 +23,33 @@
             "}",
         ]
     },
+    "debugger": {
+        "prefix": "debugger",
+        "body": [
+            "#ifdef DEBUG",
+            "template <typename T>",
+            "inline void debug_print(const char *label, T &&var)",
+            "{",
+            "    cout << \"[\" << label << \" : \" << var << \"]\" << '\\n';",
+            "}",
+            "",
+            "template <typename T, typename... Args>",
+            "inline void debug_print(const char *labels, T &&var, Args &&...args)",
+            "{",
+            "    const char *delimiter = strchr(labels, ',');",
+            "    cout << \"[\";",
+            "    cout.write(labels, delimiter - labels);",
+            "    cout << \" : \" << var << \"], \";",
+            "    return debug_print(delimiter + 2, args...);",
+            "}",
+            "",
+            "#define debug(...) debug_print(#__VA_ARGS__, __VA_ARGS__)",
+            "#else",
+            "#define debug(...)",
+            "#endif",
+        ]
+    }
+
     "template": {
         "prefix": "template",
         "body": [
@@ -192,11 +219,9 @@
             "}",
         ]
     },
-
     //=====================================================================================================//
     //====================================         timer             ======================================//
     //=====================================================================================================//
-
     "timer": {
         "prefix": "timer",
         "body": [
@@ -220,56 +245,62 @@
             "};",
         ],
     },
-
     //=====================================================================================================//
     //====================================         i/o               ======================================//
     //=====================================================================================================//
-
     "printer": {
         "prefix": "printer",
         "body": [
-            "inline void Print() { cout << \"\\n\"; }",
-            "",
-            "template<typename T>",
-            "inline void Print(T var, bool newLine = true) {",
-            "   cout << var;",
-            "   if (newLine) Print();",
+            "inline void Print()",
+            "{",
+            "    cout << \"\\n\";",
             "}",
             "",
-            "template<typename T, typename... Args>",
-            "inline void Print(T var, Args... args) {",
-            "   Print(var, false);",
-            "   if (sizeof...(args)) cout << \" \";",
-            "   Print(args...);",
+            "template <typename T>",
+            "inline void Print(T var, bool newLine = true)",
+            "{",
+            "    cout << var;",
+            "    if (newLine)",
+            "        Print();",
+            "}",
+            "",
+            "template <typename T, typename... Args>",
+            "inline void Print(T var, Args... args)",
+            "{",
+            "    Print(var, false);",
+            "    if (sizeof...(args))",
+            "        cout << \" \";",
+            "    Print(args...);",
             "}",
         ]
     },
-    
     "scanner": {
         "prefix": "scanner",
         "body": [
-            "template<typename T>",
-            "inline void Scan(T &var) { cin >> var; }",
+            "template <typename T>",
+            "inline void Scan(T &var)",
+            "{",
+            "    cin >> var;",
+            "}",
             "",
-            "template<typename T, typename... Args>",
-            "inline void Scan(T &var, Args &&... args) {",
+            "template <typename T, typename... Args>",
+            "inline void Scan(T &var, Args &&...args)",
+            "{",
             "    Scan(var);",
-            "    if (sizeof ...(args)) Scan(args...);",
+            "    if (sizeof...(args))",
+            "        Scan(args...);",
             "}",
         ]
     },
-
     //=====================================================================================================//
     //====================================         array             ======================================//
     //=====================================================================================================//
-    
     "array-size": {
         "prefix": "array-size",
         "body": [
             "sizeof($1) / sizeof(($1)[0])$0"
         ]
     },
-
     "array-sort": {
         "prefix": "array-sort",
         "body": [
@@ -284,7 +315,6 @@
             "}",
         ]
     },
-    
     "array-sort-comparator": {
         "prefix": "array-sort-comparator",
         "body": [
@@ -295,18 +325,15 @@
             "}",
         ]
     },
-
     //=====================================================================================================//
     //====================================         vector            ======================================//
     //=====================================================================================================//
-
     "vector-size": {
         "prefix": "vector-size",
         "body": [
-            "$1.begin(), $1.end();$0"
+            "$1.begin(), $1.end()$0"
         ]
     },
-
     "vector-sort": {
         "prefix": "vector-sort",
         "body": [
@@ -320,7 +347,6 @@
             "}",
         ]
     },
-
     "vector-sort-comparator": {
         "prefix": "vector-sort-comparator",
         "body": [
@@ -331,11 +357,9 @@
             "}",
         ]
     },
-
     //=====================================================================================================//
     //====================================         iterable          ======================================//
     //=====================================================================================================//
-
     "iterable-fill": {
         "prefix": "iterable-fill",
         "body": [
@@ -343,7 +367,6 @@
             "    for (auto &element : iterable) element = value",
         ]
     },
-    
     "iterable-clear": {
         "prefix": "iterable-clear",
         "body": [
@@ -351,16 +374,13 @@
             "    for (auto &element : iterable) element = 0",
         ]
     },
-    
     "iterable-for-each": {
-        "prefix": "iterable-each",
+        "prefix": "each",
         "body": [
-            "for(auto &e: $1)",
+            "for(auto &$1: $2)",
             "{",
             "\t$0",
             "}",
         ]
     },
-
-
 }
