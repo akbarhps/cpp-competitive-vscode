@@ -4,15 +4,12 @@
     {
       "label": "build",
       "type": "shell",
-      "command": "g++ -DDEBUG -Wall -g .\\src\\main.cpp -o .\\out\\main.exe",
-      "args": [
-        // "-std=c++17",
-      ]
+      "command": "g++ -DDEBUG -Wall -g ${file} -o ${fileDirname}\\${fileBasenameNoExtension};",
     },
     {
       "label": "run",
       "type": "shell",
-      "command": "Get-Content .\\out\\input.txt | .\\out\\main.exe",
+      "command": "${fileDirname}\\${fileBasenameNoExtension}",
       "dependsOn": [
         "build"
       ],
@@ -22,21 +19,15 @@
       }
     },
     {
-      "label": "run last build",
+      "label": "run with input from input.txt",
       "type": "shell",
-      "command": ".\\out\\main.exe",
+      "command": "Get-Content ./input.txt | ${fileDirname}\\${fileBasenameNoExtension}.exe",
       "problemMatcher": []
     },
     {
       "label": "run then store output to file",
       "type": "shell",
-      "command": ".\\out\\main.exe > .\\out\\output.txt",
-      "problemMatcher": []
-    },
-    {
-      "label": "run and input then store output to file",
-      "type": "shell",
-      "command": "Get-Content .\\out\\input.txt | .\\out\\main.exe > .\\out\\output.txt",
+      "command": "${fileDirname}\\${fileBasenameNoExtension}.exe > ${fileDirname}\\output.txt",
       "problemMatcher": []
     },
   ]
