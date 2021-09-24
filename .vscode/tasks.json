@@ -4,12 +4,12 @@
     {
       "label": "build",
       "type": "shell",
-      "command": "g++ -DDEBUG -Wall -g ${file} -o ${fileDirname}\\${fileBasenameNoExtension};",
+      "command": "g++ -DDEBUG -Wall -g ${file} -o ${fileDirname}\\${fileBasenameNoExtension}",
     },
     {
       "label": "run",
       "type": "shell",
-      "command": "${fileDirname}\\${fileBasenameNoExtension}",
+      "command": "Get-Content ./test.txt | ${fileDirname}\\${fileBasenameNoExtension}",
       "dependsOn": [
         "build"
       ],
